@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kate Smith | CEO Digital Business Card</title>
+
+  <style>
+    :root {
+      --blue-skies: #009CDB;
+      --fresh-start: #C0D730;
+      --partnership-pink: #EA1956;
+      --purple-purpose: #7B4198;
+      --common-ground: #35363A;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f5f5f5;
+      font-family: Arial, sans-serif;
+      color: var(--common-ground);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 460px;
+      background: white;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 10px 35px rgba(0,0,0,.12);
+    }
+
+    .color-bar {
+      height: 12px;
+      background: linear-gradient(
+        90deg,
+        var(--blue-skies),
+        var(--fresh-start),
+        var(--partnership-pink),
+        var(--purple-purpose)
+      );
+    }
+
+    .content {
+      padding: 36px 30px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 18px;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, serif;
+      font-size: 34px;
+      line-height: 1.05;
+      color: var(--common-ground);
+    }
+
+    .title {
+      margin-top: 10px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .organization {
+      margin-top: 5px;
+      font-size: 15px;
+      color: #666;
+    }
+
+    .details {
+      margin: 28px 0;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .details a {
+      color: var(--common-ground);
+      text-decoration: none;
+    }
+
+    .primary-button,
+    .secondary-button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-top: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .primary-button {
+      border: 0;
+      background: var(--blue-skies);
+      color: white;
+    }
+
+    .secondary-button {
+      border: 2px solid var(--common-ground);
+      background: white;
+      color: var(--common-ground);
+    }
+
+    .footer {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="card">
+    <div class="color-bar"></div>
+
+    <div class="content">
+
+      <div class="brand">
+        CEO
+      </div>
+
+      <h1>Kate Smith</h1>
+
+      <div class="title">
+        Director of Marketing &amp; Communications
+      </div>
+
+      <div class="organization">
+        Commission on Economic Opportunity
+      </div>
+
+      <div class="details">
+        <strong>Phone</strong><br>
+        <a href="tel:+15182726012">518-272-6012 ext. 106</a><br><br>
+
+        <strong>Email</strong><br>
+        <a href="mailto:ksmith@ceoempowers.org">
+          ksmith@ceoempowers.org
+        </a><br><br>
+
+        <strong>Office</strong><br>
+        Karen Gordon Administration Building<br>
+        2331 Fifth Avenue<br>
+        Troy, NY 12180<br><br>
+
+        <strong>Website</strong><br>
+        <a href="https://www.ceoempowers.org">
+          ceoempowers.org
+        </a>
+      </div>
+
+      <button class="primary-button" onclick="saveContact()">
+        Save to Contacts
+      </button>
+
+      <a class="secondary-button" href="tel:+15182726012">
+        Call
+      </a>
+
+      <a class="secondary-button"
+         href="mailto:ksmith@ceoempowers.org">
+        Email
+      </a>
+
+      <a class="secondary-button"
+         href="https://www.ceoempowers.org">
+        Visit CEO
+      </a>
+
+      <div class="footer">
+        Changing Lives, Improving Our Community.
+      </div>
+
+    </div>
+  </main>
+
+<script>
+function saveContact() {
+
+  const vcard =
+`BEGIN:VCARD
+VERSION:3.0
+N:Smith;Kate;;;
+FN:Kate Smith
+ORG:Commission on Economic Opportunity
+TITLE:Director of Marketing & Communications
+TEL;TYPE=WORK,VOICE:518-272-6012 x106
+EMAIL;TYPE=INTERNET,WORK:ksmith@ceoempowers.org
+ADR;TYPE=WORK:;;2331 Fifth Avenue;Troy;NY;12180;USA
+URL:https://www.ceoempowers.org
+END:VCARD`;
+
+  const blob = new Blob([vcard], {
+    type: "text/vcard;charset=utf-8"
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "Kate-Smith-CEO.vcf";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+</script>
+
+</body>
+</html>
